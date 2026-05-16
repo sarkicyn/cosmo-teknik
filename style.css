@@ -860,20 +860,33 @@ input:focus {
 
 @media (max-width: 720px) {
   .site-header {
-    inset: 12px 12px auto;
+    inset: calc(env(safe-area-inset-top) + 10px) 12px auto;
+    max-width: none;
+    padding: 10px 12px;
     border-radius: 24px;
     align-items: flex-start;
+    gap: 10px 14px;
+  }
+
+  .site-header.is-scrolled {
+    inset: calc(env(safe-area-inset-top) + 8px) 12px auto;
+    padding-block: 9px;
   }
 
   .nav-links {
-    gap: 10px;
-    font-size: 0.8rem;
+    gap: 8px 12px;
+    font-size: 0.82rem;
     flex-wrap: wrap;
     justify-content: flex-end;
+    line-height: 1.15;
+  }
+
+  .nav-links a {
+    padding-block: 5px;
   }
 
   .hero {
-    min-height: 82svh;
+    min-height: min(720px, 84svh);
   }
 
   .hero::before {
@@ -883,29 +896,30 @@ input:focus {
   }
 
   .hero__media {
-    background-position: 63% center;
+    background-position: 60% center;
   }
 
   .hero__content {
-    width: calc(100% - 32px);
-    margin: auto 16px 8vh;
-    padding-top: 112px;
+    width: calc(100% - 28px);
+    margin: auto 14px clamp(34px, 8svh, 70px);
+    padding-top: 108px;
   }
 
   h1 {
     gap: clamp(8px, 2.4vw, 18px);
-    font-size: clamp(3rem, 14vw, 6rem);
+    font-size: clamp(3rem, 13.8vw, 5.9rem);
   }
 
   h2 {
-    max-width: 11ch;
-    font-size: clamp(2.35rem, 10vw, 3.6rem);
+    max-width: 100%;
+    font-size: clamp(2.2rem, 10vw, 3.45rem);
+    line-height: 1;
   }
 
   .services .section-heading h2,
   .reviews .section-heading h2 {
     max-width: none;
-    font-size: clamp(2.35rem, 10vw, 3.6rem);
+    font-size: clamp(2.2rem, 10vw, 3.45rem);
     overflow-wrap: anywhere;
     white-space: normal;
     text-wrap: balance;
@@ -913,27 +927,136 @@ input:focus {
 
   section:not(.hero),
   .site-footer {
-    width: min(100% - 32px, 1180px);
+    width: min(100% - 28px, 1180px);
+  }
+
+  .services,
+  .booking,
+  .reviews {
+    padding-block: clamp(48px, 14vw, 72px);
+    scroll-margin-top: 96px;
+  }
+
+  .reviews {
+    padding-top: 36px;
+  }
+
+  .section-heading {
+    gap: 6px;
+    margin-bottom: 26px;
   }
 
   .services-grid,
-  .reviews-grid,
   .form-row {
     grid-template-columns: 1fr;
   }
 
-  .service-card,
-  .review-card {
+  .services-grid {
+    gap: 12px;
+  }
+
+  .reviews-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .service-card {
     min-height: 0;
+    padding: 18px;
+  }
+
+  .service-card:hover,
+  .review-card--screenshot:hover {
+    --lift: 0px;
+  }
+
+  .service-card.is-selected {
+    --lift: -3px;
+  }
+
+  .service-card__top {
+    margin-bottom: 22px;
+  }
+
+  .service-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+  }
+
+  .service-icon svg {
+    width: 26px;
+    height: 26px;
+  }
+
+  .service-card h3 {
+    line-height: 1.05;
+  }
+
+  .service-card p {
+    margin-top: 12px;
+    font-size: 0.94rem;
+    line-height: 1.55;
+  }
+
+  .booking {
+    gap: 24px;
+  }
+
+  .booking__intro p {
+    max-width: none;
+    margin-top: 16px;
+    font-size: 0.98rem;
   }
 
   .booking-panel {
+    gap: 14px;
     padding: 14px;
     border-radius: 8px;
   }
 
+  select,
+  input {
+    min-height: 48px;
+    border-radius: 12px;
+    font-size: 1rem;
+  }
+
   .confirmation {
-    min-height: 260px;
+    min-height: 220px;
+    padding: 20px;
+  }
+
+  .confirmation h3 {
+    margin-top: 36px;
+  }
+
+  .review-card {
+    min-height: 0;
+  }
+
+  .review-card--screenshot {
+    padding: 8px;
+  }
+
+  .review-card figcaption {
+    gap: 3px;
+    padding: 12px 4px 6px;
+  }
+
+  .review-card figcaption span {
+    font-size: 0.64rem;
+    letter-spacing: 0.1em;
+  }
+
+  .review-card figcaption strong {
+    font-size: 0.88rem;
+    line-height: 1.2;
+  }
+
+  .site-footer {
+    gap: 18px;
+    padding: 28px 0 34px;
   }
 }
 
@@ -943,18 +1066,112 @@ input:focus {
     gap: 8px;
   }
 
+  .brand {
+    font-size: 1.12rem;
+  }
+
   .nav-links {
     justify-content: flex-start;
+  }
+
+  .hero__slogan {
+    margin: 20px 0 28px;
+    font-size: 0.98rem;
+    line-height: 1.55;
+  }
+
+  .eyebrow {
+    margin-bottom: 12px;
+    font-size: 0.68rem;
+    letter-spacing: 0.16em;
   }
 }
 
 @media (max-width: 440px) {
+  .hero__content {
+    width: calc(100% - 24px);
+    margin-inline: 12px;
+    padding-top: 104px;
+  }
+
   h1 {
     font-size: clamp(2.75rem, 13.6vw, 3.65rem);
   }
 
+  h2,
+  .services .section-heading h2,
+  .reviews .section-heading h2 {
+    font-size: clamp(2rem, 10.4vw, 2.85rem);
+  }
+
+  section:not(.hero),
+  .site-footer {
+    width: min(100% - 24px, 1180px);
+  }
+
   .primary-button {
     width: 100%;
+    min-height: 50px;
     padding-inline: 18px;
+  }
+
+  .service-card {
+    padding: 16px;
+  }
+
+  .service-card__top {
+    margin-bottom: 18px;
+  }
+
+  .service-icon {
+    width: 42px;
+    height: 42px;
+  }
+
+  .service-icon svg {
+    width: 23px;
+    height: 23px;
+  }
+
+  .service-price {
+    font-size: 0.76rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .site-header {
+    inset: calc(env(safe-area-inset-top) + 8px) 8px auto;
+    padding: 9px 10px;
+  }
+
+  .site-header.is-scrolled {
+    inset: calc(env(safe-area-inset-top) + 6px) 8px auto;
+  }
+
+  .brand {
+    font-size: 1rem;
+  }
+
+  .nav-links {
+    gap: 5px 9px;
+    font-size: 0.72rem;
+  }
+
+  .hero__content {
+    width: calc(100% - 20px);
+    margin-inline: 10px;
+  }
+
+  h1 {
+    gap: 8px;
+    font-size: clamp(2.45rem, 13vw, 3rem);
+  }
+
+  .hero__slogan {
+    font-size: 0.92rem;
+  }
+
+  .booking-panel {
+    padding: 12px;
   }
 }
